@@ -41,3 +41,23 @@ body {
 .active {
   background-color: red;
 }
+
+/* got glow styles from W3 schools  cause it illuminates get it 😊😂*/
+.title {
+  font-size: 80px;
+  color: white;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px white, 0 0 20px #ff0000, 0 0 30px #e60000,
+      0 0 40px #cc0000, 0 0 50px #b30000, 0 0 60px #990000, 0 0 70px #800000;
+  }
+
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff3333, 0 0 40px #ff0000,
+      0 0 50px #e60000, 0 0 60px #cc0000, 0 0 70px #b30000, 0 0 80px #990000;
+  }
+}

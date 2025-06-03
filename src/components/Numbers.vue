@@ -14,22 +14,28 @@ const randomNumbers = computed(() => {
 });
 
 const hov = (num: number) => {
+  console.log(num);
+
   hoveredNumber.value = num;
 };
 
 const reset = () => {
   hoveredNumber.value = 0;
 };
+
+const isFactor = (a: number, b: number): boolean => {
+  return a % b === 0;
+};
 </script>
 
 <template>
   <div>
-	<h1>Factorize</h1>
+    <h1 class="title">Factorize</h1>
     <input type="number" v-model="limit" /><br /><br />
     <div
       class="number"
       v-for="number in randomNumbers"
-      :class="{ active: hoveredNumber !== 0 && hoveredNumber % number === 0 }"
+      :class="{  active: hoveredNumber !== 0 && isFactor(hoveredNumber, number) }"
       :key="number"
       @mouseover="hov(number)"
       @mouseout="reset"
@@ -38,4 +44,3 @@ const reset = () => {
     </div>
   </div>
 </template>
-
