@@ -1,60 +1,40 @@
+<!-- All reasons for change and exact change details in the fixes and changes MD  ❤️ -->
 <script setup lang="ts">
-const numbers = [];
-let limit = 100;
+import { ref, computed } from "vue";
 
-function n()
-{
-	let numbers = [];
-	for(var i = 0; i < limit; i++) { numbers = [...numbers, i]; }
+const limit = ref<number>(100);
+const hoveredNumber = ref<number>(0);
 
-	return numbers.sort(() => Math.random() - 0.5);
-}
-
-function hov(number) {
-  const nums = document.querySelectorAll('.number');
-
-  for(let i = 0; i < nums.length; i++)
-  {
-    const num = nums[i].textContent.trim();
-    if(number % num === 0)
-    {
-      nums[i].classList.add('active')
-      console.log('divisor', num)
-    }
+const randomNumbers = computed(() => {
+  const numbers: number[] = [];
+  for (let i = 0; i < limit.value; i++) {
+    numbers.push(i);
   }
-}
+  return numbers.sort(() => Math.random() - 0.5);
+});
 
-function reset()
-{
-	const nums = document.querySelectorAll('.number');
-	nums.forEach(num => num.classList.remove('active'))
-}
+const hov = (num: number) => {
+  hoveredNumber.value = num;
+};
+
+const reset = () => {
+  hoveredNumber.value = 0;
+};
 </script>
 
 <template>
-	<div>
-		<input type="number" v-model="limit" /><br /><br />
-		<div class="number"
-			:id="'number-'+number"
-			v-for="number in n()"
-			:key="number"
-			@mouseover="hov(number)"
-			@mouseout="reset"
-		>
-			{{ number }}
-		</div>
-	</div>
+  <div>
+    <input type="number" v-model="limit" /><br /><br />
+    <div
+      class="number"
+      v-for="number in randomNumbers"
+      :class="{ active: hoveredNumber !== 0 && hoveredNumber % number === 0 }"
+      :key="number"
+      @mouseover="hov(number)"
+      @mouseout="reset"
+    >
+      {{ number }}
+    </div>
+  </div>
 </template>
 
-<style>
-.number {
-	display: inline-block;
-	padding: 5px;
-	background-color: lightgrey;
-	margin: 5px;
-}
-
-.active {
-	background-color: red;
-}
-</style>
