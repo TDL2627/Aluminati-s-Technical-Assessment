@@ -1,4 +1,4 @@
-<!-- All reasons for change and exact change details in the fixes and changes MD  ❤️ -->
+<!-- All reasons for change and exact change details in the readme ❤️ -->
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
