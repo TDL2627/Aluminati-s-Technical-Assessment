@@ -24,6 +24,7 @@ const reset = () => {
 
 <template>
   <div>
+	<h1>Factorize</h1>
     <input type="number" v-model="limit" /><br /><br />
     <div
       class="number"
